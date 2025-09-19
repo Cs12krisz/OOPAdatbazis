@@ -8,12 +8,12 @@ namespace OOPAdatbazis
         {
             Console.Write("Kérem az adatbázis nevét: ");
             string dbName = Console.ReadLine();
-            Console.Write("Kérem a tábla nevét: ");
+            Console.Write("Kérem a tábla nevét az összes adat lekéréséhez: ");
             string choosentable = Console.ReadLine();
- 
+            ISqlStatements table;
             if (choosentable == "cars")
             {
-                ISqlStatements table = new Cars();
+                table = new Cars();
                 List<object> cars = table.GetAllData(dbName);
                 foreach (var item in cars)
                 {
@@ -24,8 +24,8 @@ namespace OOPAdatbazis
             }
             else
             {
-                ISqlStatements database = new Library();
-                List<object> books = database.GetAllData(dbName);
+                table = new Library();
+                List<object> books = table.GetAllData(dbName);
                 foreach (var item in books)
                 {
 
@@ -33,6 +33,20 @@ namespace OOPAdatbazis
                     Console.WriteLine($"{book[0].Name} = {book[0].GetValue(item)}, {book[1].Name} = {book[1].GetValue(item)}, {book[2].Name} = {book[2].GetValue(item)}, {book[3].Name} = {book[3].GetValue(item)}");
                 }
             }
+            /*
+            Console.Write("Kérem a rekord id-jét: ");
+             var rekord = table.GetById(int.Parse(Console.ReadLine()));
+            Console.WriteLine(rekord);
+            */
+
+            object newbook = new
+            {
+                title = "Star wars",
+                author = "Lucas",
+                releaseDate = "2025-09-19"
+            };
+            table = new Library();
+            table.AddNewItem(newbook);
 
 
         }

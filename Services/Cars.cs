@@ -50,7 +50,29 @@ namespace OOPAdatbazis.Services
 
         public object GetById(int id)
         {
-            throw new NotImplementedException();
+            Connect library = new Connect("library");
+
+            library.Connection.Open();
+
+            string sql = "SELECT * FROM cars WHERE id = @id";
+
+            MySqlCommand cmd = new MySqlCommand(sql, library.Connection);
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            dr.Read();
+
+            var record = new
+            {
+                id = dr.GetInt32("id"),
+                brand = dr.GetString("brand"),
+                type = dr.GetString("type"),
+                mDate = dr.GetDateTime("mDate")
+            };
+
+            library.Connection.Close();
+
+            return record;
         }
 
         public object UpdateItem(object modifiedItem)
