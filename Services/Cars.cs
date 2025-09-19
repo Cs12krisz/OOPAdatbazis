@@ -7,31 +7,29 @@ using System.Threading.Tasks;
 
 namespace OOPAdatbazis.Services
 {
-    internal class Library : ISqlStatements
+    internal class Cars : ISqlStatements
     {
-        
         public List<object> GetAllData(string dbName)
         {
-
             Connect library = new Connect(dbName);
             List<object> books = new List<object>();
             library.Connection.Open();
 
-            string sql = "SELECT * FROM books";
+            string sql = "SELECT * FROM cars";
 
             MySqlCommand cmd = new MySqlCommand(sql, library.Connection);
 
             MySqlDataReader rekordok = cmd.ExecuteReader();
-            
+
 
             while (rekordok.Read())
             {
                 var book = new
                 {
                     id = rekordok.GetInt32("id"),
-                    title = rekordok.GetString("title"),
-                    author = rekordok.GetString("author"),
-                    releaseDate = rekordok.GetDateTime("releaseDate")
+                    brand = rekordok.GetString("brand"),
+                    type = rekordok.GetString("type"),
+                    mDate = rekordok.GetDateTime("mDate")
                 };
                 books.Add(book);
             }
@@ -39,6 +37,5 @@ namespace OOPAdatbazis.Services
             library.Connection.Close();
             return books;
         }
-
     }
 }

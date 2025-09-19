@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OOPAdatbazis.Services
 {
-    internal interface ILibrary
+    internal interface ISqlStatements
     {
-        List<object> GetAllData(); 
+        List<object> GetAllData(string dbName); 
     }
 }
