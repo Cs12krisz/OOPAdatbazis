@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.Write("Kérem az adatbázis nevét: ");
+            string dbName = Console.ReadLine();
+            Connect conn = new Connect(dbName);
         }
     }
 }
