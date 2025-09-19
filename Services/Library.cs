@@ -14,7 +14,7 @@ namespace OOPAdatbazis.Services
         {
 
             Connect library = new Connect(dbName);
-            List<object> books = new List<object>();
+            List<object> cars = new List<object>();
             library.Connection.Open();
 
             string sql = "SELECT * FROM books";
@@ -26,19 +26,39 @@ namespace OOPAdatbazis.Services
 
             while (rekordok.Read())
             {
-                var book = new
+                var car = new
                 {
                     id = rekordok.GetInt32("id"),
                     title = rekordok.GetString("title"),
                     author = rekordok.GetString("author"),
                     releaseDate = rekordok.GetDateTime("releaseDate")
                 };
-                books.Add(book);
+                cars.Add(car);
             }
 
             library.Connection.Close();
-            return books;
+            return cars;
         }
 
+        public object AddNewItem(object newRecord)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object DeleteItem(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public object GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object UpdateItem(object modifiedItem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
